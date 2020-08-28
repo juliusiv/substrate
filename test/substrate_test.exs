@@ -1,4 +1,4 @@
-defmodule SubstrateTest.SubstrateTest do
+defmodule Substrate.SubstrateTest do
   use SubstrateTest.ConnCase, async: true
 
   describe "creates routes" do
@@ -14,7 +14,7 @@ defmodule SubstrateTest.SubstrateTest do
         :get
         |> Plug.Test.conn("/api/users/123")
         |> SubstrateTest.Router.call([])
-      
+
       assert conn.status == 200
     end
   end

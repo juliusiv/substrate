@@ -3,44 +3,41 @@ defmodule Substrate.Controller do
   Used within a controller file to make sense of @doc annotations that spec a handler.
   """
 
-  alias Substrate.Entry
+  alias Substrate.EndpointDefinition
 
   defmacro __using__(_opts) do
     quote do
       @doc false
-      @spec entry(atom()) :: Entry.t()
-      def entry(name),
-        do: unquote(__MODULE__).__api_operation__(__MODULE__, name)
+      @spec endpoint_definition(atom()) :: EndpointDefinition.t()
+      def endpoint_definition(name),
+        do: unquote(__MODULE__).__endpoint_definition__(__MODULE__, name)
 
-      defoverridable entry: 1
+      defoverridable endpoint_definition: 1
     end
   end
 
   @doc false
-  @spec __api_operation__(module(), atom()) :: Entry.t() | nil
-  def __api_operation__(module, name) do
-    IO.inspect(module)
-    IO.inspect(Code.fetch_docs(module))
-    with {:ok, entry} <- get_docs(module, name) do
-      entry
+  @spec __endpoint_definition__(module(), atom()) :: EndpointDefinition.t() | nil
+  def __endpoint_definition__(module, name) do
+    with {:ok, definition} <- get_docs(module, name) do
+      definition
     else
       _ -> nil
     end
   end
 
   defp get_docs(module, name) do
-    {:docs_v1, _anno, _lang, _format, _module_doc, mod_meta, mod_docs} = Code.fetch_docs(module)
+    {:docs_v1, _anno, _lang, _format, _module_doc, _mod_meta, mod_docs} = Code.fetch_docs(module)
 
     doc_for_function =
       Enum.find(mod_docs, fn
         {{:function, ^name, _}, _, _, _, _} -> true
         _ -> false
       end)
-    IO.inspect(doc_for_function)
 
     case doc_for_function do
-      {_, _, _, :none, %{handles: entry}} ->
-        {:ok, entry}
+      {_, _, _, :none, %{handles: definition}} ->
+        {:ok, definition}
 
       {_, _, _, :none, %{}} ->
         IO.warn("No docs found for function #{module}.#{name}/2")

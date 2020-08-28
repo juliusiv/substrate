@@ -1,7 +1,7 @@
 defmodule Substrate.Mixfile do
   use Mix.Project
 
-  @version "3.8.0"
+  @version "0.1.0"
 
   def project do
     [

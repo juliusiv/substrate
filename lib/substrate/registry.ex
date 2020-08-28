@@ -4,7 +4,7 @@ defmodule Substrate.Registry do
 
     quote do
       use Substrate.Controller
-      alias Substrate.Entry
+      alias Substrate.EndpointDefinition
 
       defmacro __using__(_opts) do
         quote do
@@ -17,7 +17,7 @@ defmodule Substrate.Registry do
         path = Path.join(unquote(prefix), path)
         method = Keyword.get(opts, :method, :get)
 
-        [handles: %Entry{path: path, method: method}]
+        [handles: %EndpointDefinition{path: path, method: method}]
       end
     end
   end
@@ -27,7 +27,7 @@ defmodule Substrate.Registry do
   """
   defmacro entry(module, function_name) do
     module = Macro.expand(module, __CALLER__)
-    %{method: method, path: path} = module.entry(function_name)
+    %{method: method, path: path} = module.endpoint_definition(function_name)
 
     quote do
       # Creating a scope for each endpoint is a bit redundant but it makes a nice sandbox for
