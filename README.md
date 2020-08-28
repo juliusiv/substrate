@@ -1,6 +1,6 @@
 # Substrate
 
-![Build Status](https://github.com/juliusiv/substrate/workflows/Elixir%20CI/badge.svg)
+![Build Status](https://github.com/juliusiv/substrate/workflows/ci/badge.svg) ![Docs Status](https://github.com/juliusiv/substrate/workflows/docs/badge.svg)
 
 _Substrate_ combines [Open API Spex](https://github.com/open-api-spex/open_api_spex) and decentralized routing definitions for REST services. This package is heavily inspired by [Flask-Rebar](https://github.com/plangrid/flask-rebar).
 

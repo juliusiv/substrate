@@ -1,0 +1,25 @@
+name: docs
+
+on: push
+
+jobs:
+  # Run the phoenix unittests.
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-elixir@v1.1.0
+        with:
+          otp-version: 22.x
+          elixir-version: 1.9.x
+
+      - name: Install Dependencies
+        run: |
+          mix local.rebar --force
+          mix local.hex --force
+          mix deps.get
+
+      - name: Build docs
+        run: |
+          mix docs
