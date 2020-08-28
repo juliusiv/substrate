@@ -1,12 +1,14 @@
 # Substrate
 
-_Substrate_ combines [Open API Spex](https://github.com/open-api-spex/open_api_spex) and decentralized routing definitions for REST services.
+_Substrate_ combines [Open API Spex](https://github.com/open-api-spex/open_api_spex) and decentralized routing definitions for REST services. This package is heavily inspired by [Flask-Rebar](https://github.com/plangrid/flask-rebar).
+
 
 ## Features
 
 - **Automatic OpenAPI generation** via Open API Spex.
 - **Request, response, and query param validation** via Open API Spex.
 - **Decentralized routing definitions** move route definitions out of the Phoenix router and into your controllers, alongside the rest of the endpoint's OpenAPI specifications.
+
 
 ## Example
 
@@ -52,5 +54,18 @@ defmodule YourAppWeb.UsersController do
       data: %{name: "John McPhee"}
     })
   end
+end
+```
+
+
+## Installation
+
+The package can be installed by adding `substrate` to your list of dependencies in `mix.exs`:
+
+```elixir
+def deps do
+  [
+    {:substrate, "~> 0.1"}
+  ]
 end
 ```

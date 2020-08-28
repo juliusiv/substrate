@@ -9,6 +9,13 @@ defmodule SubstrateTest.SubstrateTest do
         |> SubstrateTest.Router.call([])
 
       assert conn.status == 200
+
+      conn =
+        :get
+        |> Plug.Test.conn("/api/users/123")
+        |> SubstrateTest.Router.call([])
+      
+      assert conn.status == 200
     end
   end
 end

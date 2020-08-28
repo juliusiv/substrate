@@ -12,4 +12,9 @@ defmodule SubstrateTest.UserController do
   def list_users(conn, _params) do
     conn |> json(%{})
   end
+
+  @doc SubstrateTest.Registry.handles(path: "/users/:id", method: :get)
+  def get_user(conn, _params) do
+    conn |> json(%{})
+  end
 end

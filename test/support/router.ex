@@ -4,5 +4,6 @@ defmodule SubstrateTest.Router do
 
   Substrate.collect_all do
     entry(SubstrateTest.UserController, :list_users)
+    entry(SubstrateTest.UserController, :get_user)
   end
 end
