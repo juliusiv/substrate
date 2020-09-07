@@ -1,10 +1,10 @@
-defmodule SubstrateTest.UserController do
+defmodule SubstrateTest.BookController do
   use Phoenix.Controller
 
   use SubstrateTest.Registry,
-    path: "/users/:id",
+    path: "/books/:id",
     method: :get
-  def get_user(conn, _params) do
+  def get_book(conn, _params) do
     conn |> json(%{})
   end
 end

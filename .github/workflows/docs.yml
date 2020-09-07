@@ -3,7 +3,6 @@ name: docs
 on: push
 
 jobs:
-  # Run the phoenix unittests.
   test:
     runs-on: ubuntu-latest
 

@@ -51,9 +51,10 @@ defmodule Substrate.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:plug, "~> 1.7"},
+      {:open_api_spex, "~> 3.8"},
       {:poison, "~> 3.1", only: [:dev, :test]},
       {:jason, "~> 1.0", only: [:dev, :test]},
-      {:plug, "~> 1.7"},
       {:phoenix, "~> 1.3", only: [:dev, :test]},
       {:ex_doc, "~> 0.20", only: :dev, runtime: false},
       {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false}

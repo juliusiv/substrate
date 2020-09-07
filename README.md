@@ -37,23 +37,16 @@ end
 
 # lib/your_app_web/controllers/users_controller.ex
 
-defmodule YourAppWeb.UsersController do
+defmodule YourAppWeb.UserListController do
   use Phoenix.Controller
-  alias YourAppWeb.Registry
+  use YourAppWeb.Registry,
+    path: "/users",
+    pethod: :get
 
-  @doc Registry.handles(path: "/users", method: :get)
   def list_users(conn, _path_args_, _validated_params_, _request_body) do
     conn
     |> json(%{
       data: [%{name: "John McPhee"}]
-    })
-  end
-
-  @doc Registry.handles(path: "/users/:id", method: :get)
-  def get_user(conn, %{id: user_id}, nil, nil) do
-    conn
-    |> json(%{
-      data: %{name: "John McPhee"}
     })
   end
 end

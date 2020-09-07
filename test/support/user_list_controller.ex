@@ -1,10 +1,10 @@
-defmodule SubstrateTest.UserController do
+defmodule SubstrateTest.UserListController do
   use Phoenix.Controller
-
   use SubstrateTest.Registry,
-    path: "/users/:id",
+    path: "/users",
     method: :get
-  def get_user(conn, _params) do
+
+  def list_users(conn, _params) do
     conn |> json(%{})
   end
 end

@@ -1,23 +1,24 @@
 defmodule Substrate.Registry do
-  defmacro __using__(opts) do
-    prefix = Keyword.get(opts, :prefix, "")
+  defmacro __using__(registry_opts) do
+    prefix = Keyword.get(registry_opts, :prefix, "")
 
     quote do
-      use Substrate.Controller
-      alias Substrate.EndpointDefinition
+      alias Substrate.RouterArgs
 
-      defmacro __using__(_opts) do
-        quote do
-          use Substrate.Controller
-        end
-      end
-
-      def handles(opts) do
+      defmacro __using__(opts) do
         path = Keyword.fetch!(opts, :path)
         path = Path.join(unquote(prefix), path)
         method = Keyword.get(opts, :method, :get)
+        request_body_schema = Keyword.get(opts, :request_body_schema, nil)
+        response_body_schema = Keyword.get(opts, :response_body_schema, nil)
+        query_string_schema = Keyword.get(opts, :query_string_schema, nil)
+        headers_schema = Keyword.get(opts, :headers_schema, nil)
 
-        [handles: %EndpointDefinition{path: path, method: method}]
+        quote do
+          def __substrate_handles__() do
+            %RouterArgs{path: unquote(path), method: unquote(method)}
+          end
+        end
       end
     end
   end
@@ -27,7 +28,8 @@ defmodule Substrate.Registry do
   """
   defmacro entry(module, function_name) do
     module = Macro.expand(module, __CALLER__)
-    %{method: method, path: path} = module.endpoint_definition(function_name)
+    router_args = module.__substrate_handles__()
+    %{method: method, path: path} = router_args
 
     quote do
       # Creating a scope for each endpoint is a bit redundant but it makes a nice sandbox for

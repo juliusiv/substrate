@@ -1,4 +1,4 @@
-defmodule Substrate.EndpointDefinition do
+defmodule Substrate.RouterArgs do
   @enforce_keys :path
   defstruct method: :get,
             path: nil

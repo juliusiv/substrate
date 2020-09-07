@@ -16,6 +16,13 @@ defmodule Substrate.SubstrateTest do
         |> SubstrateTest.Router.call([])
 
       assert conn.status == 200
+
+      conn =
+        :get
+        |> Plug.Test.conn("/api/books/123")
+        |> SubstrateTest.Router.call([])
+
+      assert conn.status == 200
     end
   end
 end
