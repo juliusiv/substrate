@@ -30,7 +30,14 @@ defmodule Substrate.Mixfile do
   defp elixirc_paths(_), do: ["lib"]
 
   # Run "mix help compile.app" to learn about applications.
-  def application, do: [extra_applications: []]
+  # def application, do: [extra_applications: []]
+
+  def application do
+    [
+      mod: {SubstrateTest.Application, []},
+      extra_applications: []
+    ]
+  end
 
   defp description() do
     "Annotate your API handlers from within their own file."
@@ -56,6 +63,7 @@ defmodule Substrate.Mixfile do
       {:poison, "~> 3.1", only: [:dev, :test]},
       {:jason, "~> 1.0", only: [:dev, :test]},
       {:phoenix, "~> 1.3", only: [:dev, :test]},
+      {:phoenix_html, "~> 2.11", only: [:dev, :test]},
       {:ex_doc, "~> 0.20", only: :dev, runtime: false},
       {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false}
     ]

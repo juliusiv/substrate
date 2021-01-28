@@ -7,6 +7,8 @@ defmodule SubstrateTest.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import SubstrateTest.ConnCase
+
+      @endpoint SubstrateTest.Endpoint
     end
   end
 
